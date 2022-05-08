@@ -1,7 +1,6 @@
 from flask import Flask, render_template, flash, redirect, url_for
 from application import app
-from application.auth.forms import LoginForm, RegistrationForm
-
+from application.auth.forms import LoginForm, RegistrationForm, CommentForm
 
 secret_key = app.config['SECRET_KEY']
 
@@ -10,7 +9,9 @@ def posts():
     '''
     functions defines view for posted pitches by other users
     '''
-    return render_template('posts.html')
+    title = 'MYPITCH'
+    form = CommentForm()
+    return render_template('posts.html', title, form = form)
 
 # login page
 @app.route('/', methods=['GET', 'POST'])
