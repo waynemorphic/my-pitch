@@ -20,3 +20,11 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('PASSWORD', validators=[InputRequired()])
     confirm_password = PasswordField('CONFIRM PASSWORD', validators=[InputRequired(), EqualTo('PASSWORD')])
     submit = SubmitField('Sign up')
+    
+class CommentForm(FlaskForm):
+    '''
+    class for taking user comments purposefuly as pitch feedback
+    '''
+    
+    comment = StringField('Leave a Comment')
+    submit = SubmitField('Post')
