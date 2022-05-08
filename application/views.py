@@ -1,6 +1,6 @@
 from flask import Flask, render_template, flash, redirect, url_for
 from application import app
-from application.auth.forms import LoginForm, RegistrationForm, CommentForm
+from application.auth.forms import LoginForm, PitchForm, RegistrationForm, CommentForm
 
 secret_key = app.config['SECRET_KEY']
 
@@ -11,7 +11,8 @@ def posts():
     '''
     title = 'MYPITCH'
     form = CommentForm()
-    return render_template('posts.html', title, form = form)
+    pitch = PitchForm()
+    return render_template('posts.html', title = title, form = form, pitch = pitch)
 
 # login page
 @app.route('/', methods=['GET', 'POST'])
