@@ -26,7 +26,6 @@ class CommentForm(FlaskForm):
     '''
     class for taking user comments purposefuly as pitch feedback
     '''
-    
     comment = StringField('Leave a Comment')
     submit = SubmitField('Post')
 
@@ -36,4 +35,5 @@ class PitchForm(FlaskForm):
     '''
     category = StringField('INDUSTRY/SECTOR CATEGORY i.e Tech, Agriculture ...')
     pitch = TextAreaField('YOUR PITCH', validators=[InputRequired(), Length(min=20)])
+    submit = SubmitField('Post Pitch')
     
