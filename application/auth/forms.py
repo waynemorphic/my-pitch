@@ -1,5 +1,6 @@
+from tokenize import String
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
 from wtforms.validators import InputRequired, Length, Email, EqualTo
 
 class LoginForm(FlaskForm):
@@ -28,3 +29,11 @@ class CommentForm(FlaskForm):
     
     comment = StringField('Leave a Comment')
     submit = SubmitField('Post')
+
+class PitchForm(FlaskForm):
+    '''
+    class defines user pitches posted on the platform
+    '''
+    category = StringField('INDUSTRY/SECTOR CATEGORY i.e Tech, Agriculture ...')
+    pitch = TextAreaField('YOUR PITCH', validators=[InputRequired(), Length(min=20)])
+    
