@@ -23,6 +23,31 @@
                 <img src="..." alt="" class="rounded me-2">
             </div>
             <div>
+                {{ wtf.form_field(pitch.category)}}
+                {{ wtf.form_field(pitch.pitch)}}
+                {{ wtf.form_field(pitch.submit)}}
+            </div>
+            <div>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur
+                    adipiscing elit. Morbi justo augue, mattis
+                    non eros vitae, fermentum varius diam.
+                    Nam vel elementum lacus. Suspendisse
+                    perdiet, ornare arcu eu, pharetra arcu.
+                </p>
+            </div>
+            <div>
+                {{ wtf.form_field(form.comment) }}
+                <span class="btn-outline-secondary">{{ wtf.form_field(form.submit)}}</span>
+            </div>
+            <div>
+                <i class="fa-solid fa-thumbs-up">Upvote</i>
+
+            </div>
+            <div>
+                <i class="fa-solid fa-thumbs-down">Downvote</i>
+            </div>
+            <div>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur
                     adipiscing elit. Morbi justo augue, mattis
