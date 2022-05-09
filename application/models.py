@@ -1,5 +1,6 @@
+from . import db
 
-class User:
+class User():
     '''
     class contains the user details
     '''
@@ -30,3 +31,32 @@ class Comment:
     @classmethod
     def clear_comment(cls):
         Comment.all_comments.clear()
+  
+# database classes and cases      
+class Users(db.Model):
+    '''
+    class contains the users details defined in the database
+    '''
+    
+    # database table
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key = True)
+    email = db.Column(db.String(255))
+    role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
+    pass_secure = db.Column(db.String(255))
+    
+    def __repr__(self):
+        return f'Users { self.email}'
+    
+class Role(db.Model):
+    '''
+    class defines the roles of the users in the application
+    '''
+    __tablename__ = 'roles'
+
+    id = db.Column(db.Integer,primary_key = True)
+    name = db.Column(db.String(255))
+    users = db.relationship('Users',backref = 'role',lazy="dynamic")
+
+    def __repr__(self):
+        return f'Users {self.name}'
