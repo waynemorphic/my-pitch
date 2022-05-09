@@ -1,5 +1,3 @@
-import profile
-
 
 class User:
     '''
