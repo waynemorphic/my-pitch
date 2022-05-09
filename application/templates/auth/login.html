@@ -11,10 +11,10 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col">
-            <h3>Don't have an account? <a href="{{ url_for('register')}}">Sign Up Here</a></h3>
+            <h3>Don't have an account? <a href="{{ url_for('main.register')}}">Sign Up Here</a></h3>
             {{ wtf.form_field(form.email) }}
             {{ wtf.form_field(form.password)}}
-            <a href="{{ url_for('posts')}}"><button class="btn btn-outline-primary">{{ wtf.form_field(form.submit)}}</button></a>
+            <a href="{{ url_for('main.posts')}}"><button class="btn btn-outline-primary">{{ wtf.form_field(form.submit)}}</button></a>
         </div>
         <div class="col">
             <span>"</span><br>
