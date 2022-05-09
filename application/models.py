@@ -1,4 +1,7 @@
-from . import db
+from application import db
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
+from . import login_manager
 
 class User():
     '''
@@ -33,7 +36,7 @@ class Comment:
         Comment.all_comments.clear()
   
 # database classes and cases      
-class Users(db.Model):
+class Users(db.Model, UserMixin):
     '''
     class contains the users details defined in the database
     '''
@@ -43,7 +46,24 @@ class Users(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     email = db.Column(db.String(255))
     role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
-    pass_secure = db.Column(db.String(255))
+    pass_hash = db.Column(db.String(255))
+    
+    # login
+    @property # write only class property
+    def password(self):
+        raise AttributeError('You cannot read the password attribute')
+    
+    @password.setter
+    def password(self, password)    :
+        self.pass_secure = generate_password_hash(password)
+        
+    def verify_password(self, password):
+        return check_password_hash(self.pass_secure, password)
+    
+    # querying database for specific user
+    @login_manager.user_loader # modifies load_user function
+    def load_user(user_id):
+        return Users.query.get(int(user_id))
     
     def __repr__(self):
         return f'Users { self.email}'
