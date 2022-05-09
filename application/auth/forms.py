@@ -2,6 +2,8 @@ from tokenize import String
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
 from wtforms.validators import InputRequired, Length, Email, EqualTo
+from wtforms import ValidationError
+from ..models import Users
 
 class LoginForm(FlaskForm):
     '''
@@ -21,6 +23,15 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('PASSWORD', validators=[InputRequired()])
     confirm_password = PasswordField('CONFIRM PASSWORD', validators=[InputRequired(), EqualTo('PASSWORD')])
     submit = SubmitField('Sign up')
+    
+    # validating new users registering in the platform
+    def validate_email(self,data_field):
+            if Users.query.filter_by(email =data_field.data).first():
+                raise ValidationError('Account with that email exists')
+
+    def validate_username(self,data_field):
+        if Users.query.filter_by(username = data_field.data).first():
+            raise ValidationError('Username is taken')
     
 class CommentForm(FlaskForm):
     '''
