@@ -2,12 +2,13 @@ from flask import Flask
 from flask_bootstrap import Bootstrap
 from application import create_app, db
 from flask_script import Manager, Server
-from application.models import Users, Role
+from application.models import Users, Pitch
 from  flask_migrate import Migrate
 from flask_migrate import MigrateCommand # pip install flask_migrate==2.6.0
 
 # app instance
 app = create_app('development')
+# app = create_app('test')
 
 # instantiating the Manager class
 manager = Manager(app)
@@ -30,7 +31,7 @@ def test():
 # shell context
 @manager.shell
 def make_shell_context()   :
-    return dict (app = app, db = db, Users = Users, Role = Role)
+    return dict (app = app, db = db, Users = Users, Pitch = Pitch)
 
 # running the application
 if __name__ == '__main__':
