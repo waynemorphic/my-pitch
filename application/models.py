@@ -2,6 +2,7 @@ from application import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from . import login_manager
+from datetime import datetime
 
 class User():
     '''
@@ -44,9 +45,11 @@ class Users(db.Model, UserMixin):
     # database table
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key = True)
+    username = db.Column(db.String(255))
     email = db.Column(db.String(255))
-    role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
+    image_file = db.Column(db.String(20), default = 'default.jpeg')
     pass_hash = db.Column(db.String(255))
+    pitches = db.relationship('Pitch', backref = 'author', lazy = 'joined') # referencing the Pitch class
     
     # login
     @property # write only class property
@@ -66,17 +69,22 @@ class Users(db.Model, UserMixin):
         return Users.query.get(int(user_id))
     
     def __repr__(self):
-        return f'Users { self.email}'
+        return f"Users ({self.username }, { self.email}, {self.image_file})"
     
-class Role(db.Model):
+class Pitch(db.Model):
     '''
-    class defines the roles of the users in the application
+    class defines the user pitch posted in the platform
     '''
-    __tablename__ = 'roles'
-
-    id = db.Column(db.Integer,primary_key = True)
-    name = db.Column(db.String(255))
-    users = db.relationship('Users',backref = 'role',lazy="dynamic")
-
+    
+    __tablename__ = 'pitch'
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(100))
+    pitch = db.Column(db.Text)
+    date_posted = db.Column(db.DateTime, default = datetime.utcnow)
+    upvote = db.Column(db.Integer)
+    downvote = db.Column(db.Integer)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id')) # referencing the table name users and the column name id
+    
+    
     def __repr__(self):
-        return f'Users {self.name}'
+        return f'Users {self.title}, {self.pitch}, {self.date_posted}, {self.upvote}, {self.downvote}'
