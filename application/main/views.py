@@ -10,7 +10,7 @@ from application import db
 # secret_key = app.config['SECRET_KEY']
 
 @main.route('/posts')
-@login_required # authenticating that the user is logged before accessing the posts
+# @login_required # authenticating that the user is logged before accessing the posts
 def posts():
     '''
     functions defines view for posted pitches by other users
@@ -31,15 +31,15 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = Users.query.filter_by(email = form.email.data).first()
-        if user is not None and user.verify_password(form.email.data):
+        if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember.data)
             return redirect(request.args.get('next') or url_for('main.posts'))
         flash("Login Successful. Welcome to MYPITCH", 'message')
     
-        return redirect(url_for('posts'))
+        return redirect(url_for('main.posts'))
        
-    else:
-        return render_template('auth/login.html', title = title, form = form)
+ 
+    return render_template('auth/login.html', title = title, form = form)
 
 @main.route('/register', methods=['GET', 'POST'])
 def register():
@@ -52,15 +52,17 @@ def register():
     if form.validate_on_submit():
         user = Users (email = form.email.data, username = form.username.data, password = form.password.data)
         db.session.add(user)
-        db.session.commit(user)
+        db.session.commit()
         
         flash("Registration Successful. Welcome to MYPITCH", 'message')
-        print("he")
-        # return redirect(url_for('posts'))
+        return redirect(url_for('main.posts'))
     return render_template('auth/register.html', title = title, form = form)
 
 @main.route('/logout')
-@login_required
+# @login_required
 def logout():
     logout_user()
     return redirect(url_for("main.login"))
+
+
+# https://drive.google.com/file/d/1vfIR_EoPZRbB0BW_ESJuqLo1n1h4vkp-/view

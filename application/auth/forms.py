@@ -21,13 +21,15 @@ class RegistrationForm(FlaskForm):
     username = StringField('YOUR USERNAME', validators=[InputRequired(), Length(min=3, max=20)])
     email = StringField('YOUR EMAIL ADDRESS', validators=[InputRequired(), Email()])
     password = PasswordField('PASSWORD', validators=[InputRequired()])
-    confirm_password = PasswordField('CONFIRM PASSWORD', validators=[InputRequired(), EqualTo('PASSWORD')])
+    # confirm_password = PasswordField('CONFIRM PASSWORD', validators=[InputRequired(), EqualTo('PASSWORD')])
+    confirm_password = PasswordField('CONFIRM PASSWORD', validators=[InputRequired()])
+
     submit = SubmitField('Sign up')
     
     # validating new users registering in the platform
     def validate_email(self,data_field):
-            if Users.query.filter_by(email =data_field.data).first():
-                raise ValidationError('Account with that email exists')
+        if Users.query.filter_by(email =data_field.data).first():
+            raise ValidationError('Account with that email exists')
 
     def validate_username(self,data_field):
         if Users.query.filter_by(username = data_field.data).first():
