@@ -4,37 +4,6 @@ from flask_login import UserMixin
 from . import login_manager
 from datetime import datetime
 
-# class User():
-#     '''
-#     class contains the user details
-#     '''
-    
-#     def __init__(self, email, password):
-#         self.email = email
-#         self.password = password
-        
-# class Comment:
-#     '''
-#     class defines the comment section of the pitch
-#     '''
-    
-#     all_comments = []
-    
-#     def __init__(self, username, profile_picture, pitch, upvote, downvote, pitch_date, feedback):
-#         self.username = username
-#         self.profile_picture = profile_picture
-#         self.pitch = pitch
-#         self.upvote = upvote
-#         self.downvote = downvote
-#         self.pitch_date = pitch_date
-#         self.feedback = feedback
-        
-#     def save_comment(self):
-#         Comment.all_comments.append(self)
-        
-#     @classmethod
-#     def clear_comment(cls):
-#         Comment.all_comments.clear()
   
 # database classes and cases      
 class Users(db.Model, UserMixin):
@@ -96,6 +65,25 @@ class Pitch(db.Model):
         db.session.add(self)
         db.session.commit()
     
+    # getting pitch id
+    @classmethod
+    def get_pitch_id(cls, id):
+        pitch_id = Pitch.query.filter_by(id = id).order_by(Pitch.id.desc())
+        return pitch_id
+    
+    # user pitch method
+    @classmethod
+    def get_user_pitch(cls, id):
+        users_pitch = Pitch.query.filter_by(user_id = id).order_by(Pitch.date_posted.desc())
+        return users_pitch
+    
+    # category method
+    @classmethod
+    def get_pitch_category(cls, id):
+        pitch_category = Pitch.query.filter_by(category_id = id).order_by(Pitch.date_posted.desc())
+        return pitch_category
+    
+    
     def __repr__(self):
         return f'Users {self.title}, {self.pitch}, {self.date_posted}, {self.upvote}, {self.downvote}'
 
@@ -116,6 +104,12 @@ class Comment(db.Model):
         db.session.add(self)
         db.session.commit()
     
+    # get comment by pitch
+    @classmethod
+    def get_comment(cls, id):
+        the_comment = Comment.query.filter_by(pitch_id = id).all()
+        return the_comment
+    
     def __repr__(self):
         return f"Comment {self.feedback}"
     
@@ -129,4 +123,11 @@ class Category(db.Model):
     the_category = db.Column(db.String(255))
     pitch_relationsip = db.relationship('Pitch', backref = 'specified_category' , lazy = True) # one category can have many pitches
     
+    # getting category by name
+    @classmethod
+    def get_category_name(cls,the_category):
+        category_name = Category.query.filter_by(the_category = the_category).first()
+        return category_name
     
+    def __repr__(self):
+        return f"Category {self.the_category}"
