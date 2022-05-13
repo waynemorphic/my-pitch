@@ -1,29 +1,27 @@
 {% extends 'base.html' %}
 {% import 'bootstrap/wtf.html' as wtf %}
 
+{% block navbar %}
+{% include 'navbar.html' %}
+{% endblock %}
+
 {% block content %}
 <div class="container">
-    
+
   {{wtf.quick_form(form)}}
-  
+
 </div>
 
 <div>
-  
- 
   {% for feed in all_comments %}
-  <div div class="w3-card w3-sand w3-hover" style="padding: 10px; margin-top: 1%; border-radius: 12px;">
-      <h5>Category: {{ pitch}}</h5>
-      <small>Comments</small><br>
-      
-      <p>{{ feed.comment_stuff }}</p>
+  <div class="w3-card w3-sand w3-hover" style="padding: 10px; margin-top: 1%; border-radius: 12px;">
+    <h5>Pitch</h5>
+    <p>{{ pitch }}</p>
+    <small>Comments</small><br>
+
+    <p> - {{ feed.comment_stuff }}</p>
   </div>
-  
-  
 </div>
 
-  
-  
-  {% endfor %}
-</div>
+{% endfor %}
 {% endblock %}
