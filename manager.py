@@ -7,7 +7,7 @@ from  flask_migrate import Migrate
 from flask_migrate import MigrateCommand # pip install flask_migrate==2.6.0
 
 # app instance
-app = create_app('development')
+app = create_app('production')
 # app = create_app('test')
 
 # instantiating the Manager class
