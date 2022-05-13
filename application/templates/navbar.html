@@ -1,10 +1,16 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="w3-bar">
-        <a class="navbar-brand" href="#">MYPITCH</a>
-        <a href="#" class="w3-bar-item w3-button w3-hover-teal w3-right">HOME</a>
-        <a href="#" class="w3-bar-item w3-button w3-hover-teal w3-right">PROFILE</a>
-        <a href="#" class="w3-bar-item w3-button w3-hover-teal w3-right">POSTS</a>
-        <a href="{{url_for('main.logout')}}" class="w3-bar-item w3-button w3-hover-teal w3-right">SIGN OUT</a>
+    <div class="w3-bar w3-sand">
+        <a id='were' class="navbar-brand" href="/">MYPITCH</a>
+        {% if current_user.is_authenticated %}
+        <a href="{{url_for('main.logout')}}" class="w3-bar-item w3-button w3-hover-teal w3-right">LOGOUT</a>
+        <a href="{{url_for('main.profile',uname=current_user.username)}}" class="w3-bar-item w3-button w3-hover-teal w3-right">MY PROFILE</a>
+        {% else %}
+        <a href="{{url_for('main.register')}}" class="w3-bar-item w3-button w3-hover-teal w3-right">SIGN IN</a>
+        {% endif %}
+
+        <a href="{{url_for('main.add_pitch',uname=current_user.username)}}"
+            class="w3-bar-item w3-button w3-hover-teal w3-right">ADD PITCH</a>
+        <a href="{{url_for('main.posts')}}" class="w3-bar-item w3-button w3-hover-teal w3-right">HOME</a>
     </div>
 </nav>

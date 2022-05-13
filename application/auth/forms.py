@@ -9,8 +9,8 @@ class LoginForm(FlaskForm):
     '''
     class for identifying login fields
     '''
-    email = StringField('YOUR EMAIL ADDRESS', validators=[InputRequired(), Email()])
-    password = PasswordField('PASSWORD', validators=[InputRequired()])
+    email = StringField('Email Address', validators=[InputRequired(), Email()])
+    password = PasswordField('Password', validators=[InputRequired()])
     submit = SubmitField('Login')
     remember = BooleanField('Remember Me')
 
@@ -18,11 +18,11 @@ class RegistrationForm(FlaskForm):
     '''
     class for identifying registration form
     '''
-    username = StringField('YOUR USERNAME', validators=[InputRequired(), Length(min=3, max=20)])
-    email = StringField('YOUR EMAIL ADDRESS', validators=[InputRequired(), Email()])
-    password = PasswordField('PASSWORD', validators=[InputRequired()])
+    username = StringField('Username', validators=[InputRequired(), Length(min=3, max=20)])
+    email = StringField('Email Address', validators=[InputRequired(), Email()])
+    password = PasswordField('Password', validators=[InputRequired()])
     # confirm_password = PasswordField('CONFIRM PASSWORD', validators=[InputRequired(), EqualTo('PASSWORD')])
-    confirm_password = PasswordField('CONFIRM PASSWORD', validators=[InputRequired()])
+    confirm_password = PasswordField('Confirm Password', validators=[InputRequired()])
 
     submit = SubmitField('Sign up')
     
@@ -39,14 +39,17 @@ class CommentForm(FlaskForm):
     '''
     class for taking user comments purposefuly as pitch feedback
     '''
-    comment = StringField('Leave a Comment')
+    comment_stuff = StringField('Leave a Comment')
     submit = SubmitField('Post')
 
 class PitchForm(FlaskForm):
     '''
     class defines user pitches posted on the platform
     '''
-    category = StringField('INDUSTRY/SECTOR CATEGORY i.e Tech, Agriculture ...')
-    pitch = TextAreaField('YOUR PITCH', validators=[InputRequired(), Length(min=20)])
+    category_stuff = StringField('Category i.e Tech, Marketing....')
+    pitch_stuff = TextAreaField('Enter Pitch', validators=[InputRequired(), Length(min=20)])
     submit = SubmitField('Post Pitch')
-    
+
+class UpdateProfile(FlaskForm):
+    bio = TextAreaField('Tell us about you.',validators = [InputRequired()])
+    submit = SubmitField('Submit')

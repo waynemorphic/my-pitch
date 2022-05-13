@@ -7,15 +7,21 @@
 
 {% block content %}
 
-<div class="container">
-    <div>
-        {{form.hidden_tag()}}
-        {{wtf.quick_form(form)}}
-       
-        <a href="{{ url_for('main.posts')}}"><button class="btn btn-outline-info">{{ wtf.form_field(form.submit)}}</button></a>
+<body style="background-color: #8FB8ED; color: black; display: flex; justify-content: center; align-items: center;">
+</body>
+<div class="container" style="margin-top: 10%">
+    <div class="d-flex justify-content-center">
+        <div class="row ">
+            <div class="col">
+                {{form.hidden_tag()}}
+                {{wtf.quick_form(form)}}
+                <small>Already have an account? <a href="{{ url_for('main.login')}}">Sign In Here</a></small>
+            </div>
+        </div>
     </div>
-    <h3>Already have an account? <a href="{{ url_for('main.login')}}">Sign In Here</a></h3>
+    
 </div>
+</body>
 {%endblock %}
 
 {% block footer%}

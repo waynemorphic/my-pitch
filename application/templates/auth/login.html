@@ -1,36 +1,37 @@
 {% extends 'base.html'%}
 {% import "bootstrap/wtf.html" as wtf %}
 
-
-
 {% block head %}
 {{ super() }}
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col">
-            <h3>Don't have an account? <a href="{{ url_for('main.register')}}">Sign Up Here</a></h3>
-            {{form.hidden_tag()}}
-            {{wtf.quick_form(form)}}
-            <!-- <a href="{{ url_for('main.posts')}}"><button class="btn btn-outline-primary">{{
-                    wtf.form_field(form.submit)}}</button></a> -->
-        </div>
-        <div class="col">
-            <span>"</span><br>
-            <p>
-                In life, you only have 60 seconds to impress<br>
-                someone. 1 minute can make or break you.<br>
-                MYPITCH helps you post your one minute<br>
-                pitch for your idea and lets like minded users<br>
-                give vital feedback and vote for it
-            </p>
-            <span>"</span>
+
+<body style="background-color: #8FB8ED; color: black; display: flex; justify-content: center; align-items: center;">
+    <div class="container">
+
+        
+        <div class="col-6" style="align-items:center; padding-top: 10%; padding-bottom: 10%;">
+            <h3 style="text-align: center;">Welcome to <span
+                    style="color: #03045E; font-family: 'Plus Jakarta Sans', sans-serif;">MYPITCH</span></h3>
+            <div class="d-flex justify-content-center">
+                <div class="row gy-12">
+                    <div class="col-12">
+                        {{form.hidden_tag()}}
+                        {{wtf.quick_form(form)}}
+                        <small style="margin-top: 3%; font-family: 'Josefin Sans', sans-serif;">Don't have an account? <a
+                            href="{{ url_for('main.register')}}"><span style="color: #03045E">Create Account Here</span></a></small>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </div>
-</div>
+</body>
 {%endblock %}
 
 {% block footer%}
 {% endblock%}
+
+<!-- Documents/moringa-school-projects/python-projects/flask-projects/my-pitch -->
