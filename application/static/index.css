@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zen+Loop&display=swap');
+
 body {
     
     color: black;
@@ -6,4 +9,7 @@ body {
 
 #were {
   font-family: 'Montserrat Alternates', sans-serif;
+  color: #03045E;
+  margin-left: 1.2%;
 }
+

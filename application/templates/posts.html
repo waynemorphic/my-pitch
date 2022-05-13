@@ -12,50 +12,132 @@
 
 {% block content %}
 
-<body style="background-color: white; color: black;">
-    <div class="container">
-        <div>
-            {% for message in get_flashed_messages() %}
-            <div class="alert alert-success">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                {{message}}
-            </div>
+<body style="background-color: #FFDEE9;
+background-image: linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%); background-repeat: no-repeat ">
+    <div class="container-fluid">
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{message}}
             {% endfor %}
-            <div class="w3-card w3-sand" style="padding: 10px; margin-top: 1%">
-
-                
-
-
-        <div>
-            {% for post in posts %}
-            {% if user %}
-            <p> {{user.username| capitalize}} </p>
-            {% endif %}
-
-            <div div class="w3-card w3-sand w3-hover" style="padding: 10px; margin-top: 1%; border-radius: 12px;">
-                <h5>Category: {{ post.category_stuff}}</h5>
-                <p>{{ post.pitch_stuff}}</p>
-                <small>Posted On: {{post.date_posted.strftime('%Y-%m-%d')}}</small><br>
-                <button class="btn btn-outline-primary">
-                    <a href="{{url_for('main.upvotes',id = post.id)}}">Upvote</a>
-                </button>
-                <p>{{post.upvote.count()}}</p>
-                <button class="btn btn-outline-primary">
-                    <a href="{{url_for('main.downvotes',id = post.id)}}">Downvote</a>
-                </button>
-                <p>{{post.downvote.count()}}</p>
-                <a href="{{url_for('main.add_comment', pitch_id = post.id)}}" class="btn btn-outline-primary">Comment</a>
-                
-            </div>
-            
-            {% endfor %}
-            
         </div>
-        
 
+        <div class="row" style="margin-top: 1%; margin-left: 1%;">
+            <div class="col-sm-7">
+                {% if user %}
+                <p> {{user.username| capitalize}} </p>
+                {% endif %}
 
+                <div class=""
+                    style="padding: 1%; font-family: 'Lora', serif; font-size: 1.2rem; text-align: justify; display: grid; grid-template-rows: auto auto; gap: 20px; width: auto;">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <h5>Category: Pick Up Lines</h5>
+                                </h5>
+                                <p class="card-text">Hey, my name is Microsoft. Can I crash at your place tonight?
+                                </p>
+                                <div class="d-flex ">
+                                    <div class="p-2  order-1">
+                                        <button class="btn btn-outline-primary">
+                                            <a href=""style="text-decoration: none">Upvotes
+                                                </a>
+                                        </button>
+                                    </div>
+                                    <div class="p-2 order-2">
+                                        <button class="btn btn-outline-primary">
+                                            <a href="" style="text-decoration: none">Downvotes
+                                                </a>
+                                        </button>
+                                    </div>
+                                    <div class="p-2 order-3">
+                                        <a href=""
+                                            class="btn btn-outline-warning">Comment</a>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <h5>Category: Tech</h5>
+                                </h5>
+                                <p class="card-text">HIn working with other budding B2B SaaS companies, we've found that one of the key issues they 
+                                    struggle with is content marketing. This past year we helped a number of your industry peers to create, publish, 
+                                    and promote blog content to support their inbound marketing efforts, resulting in an average 20% increase in leads generated. 
+                                    Would you like to hear more?
+                                </p>
+                                <div class="d-flex ">
+                                    <div class="p-2  order-1">
+                                        <button class="btn btn-outline-primary">
+                                            <a href=""style="text-decoration: none">Upvotes
+                                                </a>
+                                        </button>
+                                    </div>
+                                    <div class="p-2 order-2">
+                                        <button class="btn btn-outline-primary">
+                                            <a href="" style="text-decoration: none">Downvotes
+                                                </a>
+                                        </button>
+                                    </div>
+                                    <div class="p-2 order-3">
+                                        <a href=""
+                                            class="btn btn-outline-warning">Comment</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% for post in posts %}
+                <div class=""
+                    style="padding: 1%; font-family: 'Lora', serif; font-size: 1.2rem; text-align: justify; display: grid; grid-template-rows: auto auto; gap: 20px; width: auto;">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <h5>Category: {{ post.category_stuff}}</h5>
+                                </h5>
+                                <p class="card-text">{{ post.pitch_stuff}}</p>
+
+                                <div class="d-flex ">
+                                    <div class="p-2  order-1">
+                                        <button class="btn btn-outline-primary">
+                                            <a href="{{url_for('main.upvotes',id = post.id)}}"style="text-decoration: none">Upvotes
+                                                {{post.upvote.count()}}</a>
+                                        </button>
+                                    </div>
+                                    <div class="p-2 order-2">
+                                        <button class="btn btn-outline-primary">
+                                            <a href="{{url_for('main.downvotes',id = post.id)}}" style="text-decoration: none">Downvotes
+                                                {{post.downvote.count()}}</a>
+                                        </button>
+                                    </div>
+                                    <div class="p-2 order-3">
+                                        <a href="{{url_for('main.add_comment', pitch_id = post.id)}}"
+                                            class="btn btn-outline-warning">Comment</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+                <div class="col-sm-4" style="margin-left: 0.5%; font-family: 'Lora', serif;">
+                    <ul class="list-group" style="margin-left: 10%; background-color: #03045E;">
+                        <li class="list-group-item list-group-item-warning">Pitch Categories</li>
+                        <li class="list-group-item list-group-item-primary">Tech</li>
+                        <li class="list-group-item list-group-item-primary">Marketing</li>
+                        <li class="list-group-item list-group-item-primary">Pick Up lines</li>
+                        <li class="list-group-item list-group-item-primary">Educational</li>
+                      </ul>
+                </div>            
+        </div>
     </div>
-    <script src="{{url_for('static',filename='index.js')}}"></script>
 
 </body>
 {%endblock %}
