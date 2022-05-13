@@ -6,7 +6,7 @@ class Config:
     General configuration parent class
     '''
     SECRET_KEY = os.environ.get('SECRET_KEY')
-    # SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://wayne:123@localhost/pitchdb'
+    # SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://wayne:123@localhost/pitchdb' | (uncomment this to access postgres locally)
     UPLOADED_PHOTOS_DEST ='app/static/photos'
 
 
@@ -19,9 +19,9 @@ class ProdConfig(Config):
         Config: The parent configuration class with General configuration settings
     '''
     
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
-    if SQLALCHEMY_DATABASE_URI.startswith("postgres://"):
-        SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace("postgres://", "postgresql://", 1)
+    # SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+    # if SQLALCHEMY_DATABASE_URI.startswith("postgres://"):
+    #     SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace("postgres://", "postgresql://", 1)
 
 
 class DevConfig(Config):
@@ -32,7 +32,7 @@ class DevConfig(Config):
         Config: The parent configuration class with General configuration settings
     '''
 
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://wayne:123@localhost/pitchdb'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://wayne:123@localhost/pitchdb' # comment this line to acess postgres locally
     
     DEBUG = False
 
