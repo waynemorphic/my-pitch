@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block content %}
+<div class="container">
+    
+  {{wtf.quick_form(form)}}
+  
+</div>
+
+<div>
+  
+ 
+  {% for feed in all_comments %}
+  <div div class="w3-card w3-sand w3-hover" style="padding: 10px; margin-top: 1%; border-radius: 12px;">
+      <h5>Category: {{ pitch}}</h5>
+      <small>Posted On: </small><br>
+      <button class="btn btn-outline-primary" id = "up">Upvote</button>
+      <button class="btn btn-outline-primary">Downvote</button>
+      <p>{{ feed.comment_stuff }}</p>
+  </div>
+  
+  
+</div>
+
+  
+  
+  {% endfor %}
+</div>
+{% endblock %}
